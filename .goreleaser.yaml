@@ -1,0 +1,68 @@
+# This is an example .goreleaser.yml file with some sensible defaults.
+# Make sure to check the documentation at https://goreleaser.com
+
+# The lines below are called `modelines`. See `:help modeline`
+# Feel free to remove those if you don't want/need to use them.
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+# vim: set ts=2 sw=2 tw=0 fo=cnqoj
+
+version: 2
+
+project_name: secretly
+
+before:
+  hooks:
+    - go mod tidy
+    - go generate ./...
+
+builds:
+  # You can have multiple builds defined as a yaml list
+  - id: "api"
+    main: ./cmd/api
+    binary: api
+  - id: "cli"
+    main: ./cmd/cli
+    binary: cli
+
+archives:
+  - format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    format_overrides:
+      - goos: windows
+        format: zip
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+
+release:
+  github:
+    owner: jack-kitto
+    name: secretly
+  draft: true
+  replace_existing_draft: true
+  replace_existing_artifacts: true
+  target_commitish: "{{ .Commit }}"
+  prerelease: true
+  make_latest: true
+  mode: append
+  header: |
+    ## Secretly Release {{.Tag}} ({{ .Date }})
+
+    Welcome to this new release!
+  footer: |
+    ## Thanks for using Secretly!
+
+    For more information, please visit our [documentation](https://github.com/jack-kitto/secretly).
+
+  include_meta: true
