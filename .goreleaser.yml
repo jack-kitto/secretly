@@ -1,3 +1,5 @@
+version: 2
+
 project_name: secretly
 
 builds:
@@ -11,13 +13,6 @@ builds:
   - id: api
     main: ./cmd/api
     binary: secretly-api
-    goos:
-      - linux
-      - darwin
-      - windows
-  - id: web
-    main: ./cmd/web
-    binary: secretly-web
     goos:
       - linux
       - darwin
@@ -39,5 +34,5 @@ release:
   draft: true
 
 github:
-  owner: jack-kitto
+  owner: yourusername
   name: secretly
