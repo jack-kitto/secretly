@@ -1,0 +1,43 @@
+project_name: secretly
+
+builds:
+  - id: cli
+    main: ./cmd/cli
+    binary: secretly-cli
+    goos:
+      - linux
+      - darwin
+      - windows
+  - id: api
+    main: ./cmd/api
+    binary: secretly-api
+    goos:
+      - linux
+      - darwin
+      - windows
+  - id: web
+    main: ./cmd/web
+    binary: secretly-web
+    goos:
+      - linux
+      - darwin
+      - windows
+
+changelog:
+  use: github
+  groups:
+    - title: Features
+      regexp: "^.*feat[(\\w)]*:+.*$"
+      order: 0
+    - title: 'Bug fixes'
+      regexp: "^.*fix[(\\w)]*:+.*$"
+      order: 1
+    - title: Others
+      order: 999
+
+release:
+  draft: true
+
+github:
+  owner: jack-kitto
+  name: secretly
