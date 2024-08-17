@@ -18,21 +18,26 @@ builds:
       - darwin
       - windows
 
-changelog:
-  use: github
-  groups:
-    - title: Features
-      regexp: "^.*feat[(\\w)]*:+.*$"
-      order: 0
-    - title: 'Bug fixes'
-      regexp: "^.*fix[(\\w)]*:+.*$"
-      order: 1
-    - title: Others
-      order: 999
-
 release:
+  github:
+    owner: jack-kitto
+    name: secretly
   draft: true
+  replace_existing_draft: true
+  name_template: "{{.ProjectName}}-v{{.Version}}"
+  header: |
+    ## Secretly Release {{.Tag}} ({{ .Date }})
 
-github:
-  owner: jack-kitto
-  name: secretly
+    Welcome to this new release of Secretly!
+  footer: |
+    ## Thanks for using Secretly!
+
+    For more information, please visit our [documentation](https://github.com/jack-kitto/secretly).
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
