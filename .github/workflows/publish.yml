@@ -1,0 +1,24 @@
+name: Publish Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17
+    - name: Run GoReleaser
+      run: |
+        if [[ ${{ github.event.release.tag_name }} == cli/v* ]]; then
+          go run github.com/goreleaser/goreleaser@latest --config .goreleaser.cli.yaml
+        elif [[ ${{ github.event.release.tag_name }} == api/v* ]]; then
+          go run github.com/goreleaser/goreleaser@latest --config .goreleaser.api.yaml
+        elif [[ ${{ github.event.release.tag_name }} == web/v* ]]; then
+          go run github.com/goreleaser/goreleaser@latest --config .goreleaser.web.yaml
+        fi

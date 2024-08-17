@@ -1,4 +1,4 @@
-name: Release
+name: Create Draft Release
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
       - 'web/v*'
 
 jobs:
-  release:
+  create-draft-release:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -25,7 +25,7 @@ jobs:
         elif [[ ${{ github.ref }} == refs/tags/web/* ]]; then
           make build-web
         fi
-    - name: Create Release
+    - name: Create Draft Release
       id: create_release
       uses: actions/create-release@v1
       env:
@@ -33,5 +33,5 @@ jobs:
       with:
         tag_name: ${{ github.ref }}
         release_name: Release ${{ github.ref }}
-        draft: false
+        draft: true
         prerelease: false
