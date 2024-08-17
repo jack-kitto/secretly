@@ -5,6 +5,7 @@ on:
     tags:
       - 'cli/v*'
       - 'api/v*'
+      - 'web/v*'
 
 jobs:
   release:
@@ -21,6 +22,8 @@ jobs:
           make build-cli
         elif [[ ${{ github.ref }} == refs/tags/api/* ]]; then
           make build-api
+        elif [[ ${{ github.ref }} == refs/tags/web/* ]]; then
+          make build-web
         fi
     - name: Create Release
       id: create_release

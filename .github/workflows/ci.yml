@@ -19,3 +19,5 @@ jobs:
       run: make build-cli
     - name: Build API
       run: make build-api
+    - name: Build WEB
+      run: make build-web
