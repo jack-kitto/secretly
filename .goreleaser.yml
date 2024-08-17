@@ -34,5 +34,5 @@ release:
   draft: true
 
 github:
-  owner: yourusername
+  owner: jack-kitto
   name: secretly
