@@ -1,0 +1,31 @@
+version: 2
+
+project_name: secretly
+
+monorepo:
+  tag_prefix: api/
+  dir: cmd/api
+
+builds:
+  - id: api
+    main: ./cmd/api
+    binary: secretly-api
+    goos:
+      - linux
+      - darwin
+      - windows
+
+release:
+  github:
+    owner: jack-kitto
+    name: secretly
+  draft: true
+  name_template: "API-v{{.Version}}"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'

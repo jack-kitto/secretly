@@ -25,6 +25,10 @@ release:
   draft: true
   replace_existing_draft: true
   name_template: "{{.ProjectName}}-v{{.Version}}"
+  replace_existing_artifacts: true
+  mode: append
+  make_latest: true
+  include_meta: true
   header: |
     ## Secretly Release {{.Tag}} ({{ .Date }})
 
@@ -41,3 +45,4 @@ changelog:
       - '^docs:'
       - '^test:'
       - '^chore:'
+
