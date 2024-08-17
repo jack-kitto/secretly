@@ -1,16 +1,9 @@
 package main
 
-import (
-	"fmt"
-	"secretly/internal/server"
-)
+import "fmt"
 
 func main() {
-
-	server := server.NewServer()
-
-	err := server.ListenAndServe()
-	if err != nil {
-		panic(fmt.Sprintf("cannot start server: %s", err))
-	}
+	fmt.Println("API component")
+	fmt.Println("Feature 1")
+	fmt.Println("Feature 2")
 }
